@@ -34,4 +34,11 @@ function registerValidator() {
     ]
 }
 
-module.exports = { registerValidator }
+function loginValidator() {
+    return [
+        body('userName').notEmpty().withMessage('نام کاربری نمی تواند خالی باشد'),
+       
+        body('password').isLength({ min: 6, max: 16 }).withMessage('رمز عبور حداقل باید 6 و حداکثر 16 باشد')
+    ]
+}
+module.exports = { registerValidator, loginValidator }
