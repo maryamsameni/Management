@@ -8,6 +8,14 @@ function tokenGenerator(payload) {
     const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '3 days' })
     return token
 }
+
+function tokenJwtVerify(token) {
+    const result = jwt.verify(token, process.env.SECRET_KEY)
+    if (!result?.userName) throw { status: 401, message: 'لطفا وارد حساب کاربری خود شوید' }
+    return result
+}
 module.exports = {
-    hashString, tokenGenerator
+    hashString,
+    tokenGenerator,
+    tokenJwtVerify
 }

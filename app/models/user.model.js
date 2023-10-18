@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     roles: { type: [String], default: ["USER"] },
     token: { type: String, default: "" }
 }, {
-    timestamps: true
+    timestamps: true 
 })
 
 const UserModel = mongoose.model('user', UserSchema)
