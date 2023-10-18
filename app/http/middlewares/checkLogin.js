@@ -9,7 +9,6 @@ const checkLogin = async (req, res, next) => {
         if (!token) throw verifyError
         const result = tokenJwtVerify(token)
         const { userName } = result
-        console.log(result);
         const user = await UserModel.findOne({ userName }, { password: 0 })
         if (!user) throw verifyError
         req.user = user
