@@ -1,9 +1,11 @@
 const { UserModel } = require("../../models/user.model");
+const { createLinkForFiles } = require("../../modules/functions")
 
 class UserController {
     getProfile(req, res, next) {
         try {
             const user = req.user
+            user.profileImage = createLinkForFiles(user.profileImage, req)
             return res.status(200).json({
                 status: 200,
                 success: true,
@@ -13,6 +15,7 @@ class UserController {
             next(error)
         }
     }
+
     async editProfile(req, res, next) {
         try {
             const data = req.body
@@ -36,6 +39,24 @@ class UserController {
             next(error)
         }
     }
+
+    async uploadProfileImage(req, res, next) {
+        try {
+            const userId = req.user._id
+            const filePath = req.file?.path
+            console.log(filePath);
+            const result = await UserModel.updateOne({ _id: userId }, { $set: { profileImage: filePath } })
+            if (result.modifiedCount == 0) throw { status: 400, message: 'به روزرسانی انجام نشد' }
+            return res.status(200).json({
+                status: 200,
+                success: true,
+                message: 'به روز رسانی با موفقیت انجام شد'
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
     addSkills() { }
     editSkills() { }
     acceptInviteTeam() { }

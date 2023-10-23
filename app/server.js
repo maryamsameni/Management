@@ -38,7 +38,7 @@ module.exports = class Application {
         this.#app.use((error, req, res, next) => {
             const status = error?.status || 500
             const message = error?.message || 'internalServer'
-            return res.send(status).json({
+            return res.status(status).json({
                 status,
                 success: false,
                 message
@@ -52,11 +52,5 @@ module.exports = class Application {
                 message: 'this is a new Express application'
             })
         })
-        // this.#app.use((error, req, res, next) => {
-        //     try {
-        //     } catch (error) {
-        //         next(error)
-        //     }
-        // })
     }
 }

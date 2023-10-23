@@ -1,6 +1,7 @@
 const { UserModel } = require("../../models/user.model")
 const { hashString, tokenGenerator } = require("../../modules/functions")
 const bcrypt = require('bcrypt')
+
 class AuthController {
     async register(req, res, next) {
         try {
@@ -35,9 +36,9 @@ class AuthController {
                 token
             })
         } catch (error) {
-            next(error)
+            next(error.message)
         }
     }
-    resetPassword() { }
 }
+
 module.exports = { AuthController: new AuthController }

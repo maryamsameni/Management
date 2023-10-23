@@ -9,9 +9,10 @@ const UserSchema = new mongoose.Schema({
     skills: { type: [String], default: [] },
     teams: { type: [mongoose.Types.ObjectId], default: [] },
     roles: { type: [String], default: ["USER"] },
-    token: { type: String, default: "" }
+    token: { type: String, default: "" },
+    profileImage: { type: String }
 }, {
-    timestamps: true 
+    timestamps: true
 })
 
 const UserModel = mongoose.model('user', UserSchema)

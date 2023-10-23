@@ -1,4 +1,5 @@
 const { validationResult } = require("express-validator")
+
 function expressValidatorMapper(req, res, next) {
     let messages = {}
     const result = validationResult(req)
@@ -15,6 +16,7 @@ function expressValidatorMapper(req, res, next) {
     }
     next()
 }
+
 module.exports = {
     expressValidatorMapper
 }
