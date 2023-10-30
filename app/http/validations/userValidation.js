@@ -6,9 +6,8 @@ function imageValidator() {
         body("image").custom((value, { req }) => {
             if (Object.keys(req.file).length == 0) throw new Error("لطفا یک تصویر را انتخاب کنید")
             const ext = path.extname(req.file.originalname)
-            const exts = [".png", ".jpg", ".jpeg", ".gif", ".webp"];
-            const whiteListFormat = ['.png', '.jpg', '.jpeg', '.webp']
-            if (!whiteListFormat.includes(req.file.mimetype)) {
+            const exts =[".PNG", ".JPG", ".JPEG", ".WEBPE", ".GIF"];
+            if (!exts.includes(ext)) {
                 throw new Error("فرمت ارسال شده صحیح نمیباشد")
             }
             const maxSize = 2 * 1024 * 1024;
